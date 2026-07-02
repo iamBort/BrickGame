@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=4 uid="uid://8vlowjxqad01"]
+
+[ext_resource type="PackedScene" uid="uid://peh2ak5weq5a" path="res://Scenes/ball.tscn" id="1_knagl"]
+[ext_resource type="PackedScene" uid="uid://cvbm8xl0y0cod" path="res://Scenes/game_manager.tscn" id="1_rxb0p"]
+[ext_resource type="PackedScene" uid="uid://bi4a34chw4bmo" path="res://Scenes/player.tscn" id="2_kl852"]
+[ext_resource type="Script" uid="uid://cb4ji30wp5u5f" path="res://Scripts/deadzone.gd" id="4_4nmru"]
+[ext_resource type="Texture2D" uid="uid://bdx6k6o0w0ioq" path="res://Sprites/Border.png" id="5_kl852"]
+[ext_resource type="Texture2D" uid="uid://bj8l6br1i73pb" path="res://Sprites/Bricks.png" id="6_k3vav"]
+[ext_resource type="Script" uid="uid://ewj786hahqlv" path="res://Scripts/brick_set.gd" id="7_3pxkc"]
+[ext_resource type="PackedScene" uid="uid://c6yh0ac7l5hwn" path="res://Scenes/GameUI.tscn" id="8_rxb0p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jpfo"]
+size = Vector2(644, 4)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nmru"]
+texture = ExtResource("5_kl852")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_05u5g"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_4nmru")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3pxkc"]
+texture = ExtResource("6_k3vav")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_rxb0p"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_3pxkc")
+
+[node name="Scene1" type="Node2D"]
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("game_ui") instance=ExtResource("1_rxb0p")]
+unique_name_in_owner = true
+game_ui = NodePath("../GameUI")
+
+[node name="Ball" parent="." instance=ExtResource("1_knagl")]
+position = Vector2(0, 344)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_kl852")]
+position = Vector2(0, 498)
+SPEED = 1000.0
+
+[node name="Deadzone" type="Area2D" parent="."]
+position = Vector2(0, 535)
+script = ExtResource("4_4nmru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deadzone"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_0jpfo")
+
+[node name="Border" type="TileMapLayer" parent="."]
+position = Vector2(0, 16)
+scale = Vector2(1.00191, 1)
+tile_map_data = PackedByteArray("AAD1//b/AAAAAAEAAAAKAPb/AAACAAEAAAAKAPf/AAACAAEAAAAKAPj/AAACAAEAAAAKAPn/AAACAAEAAAAKAPr/AAACAAEAAAAKAPv/AAACAAEAAAAKAPz/AAACAAEAAAAKAP3/AAACAAEAAAAKAP7/AAACAAEAAAAKAP//AAACAAEAAAAKAAAAAAACAAEAAAAKAAEAAAACAAEAAAAKAAIAAAACAAEAAAAKAAMAAAACAAEAAAAKAAQAAAACAAEAAAAKAAUAAAACAAEAAAAKAAYAAAACAAEAAAAKAAcAAAACAAEAAAAKAAgAAAACAAEAAAAKAAkAAAACAAEAAAD1/wkAAAAAAAEAAAD1/wgAAAAAAAEAAAD1/wcAAAAAAAEAAAD1/wYAAAAAAAEAAAD1/wUAAAAAAAEAAAD1/wQAAAAAAAEAAAD1/wMAAAAAAAEAAAD1/wIAAAAAAAEAAAD1/wEAAAAAAAEAAAD1/wAAAAAAAAEAAAD1////AAAAAAEAAAD1//7/AAAAAAEAAAD1//3/AAAAAAEAAAD1//z/AAAAAAEAAAD1//v/AAAAAAEAAAD1//r/AAAAAAEAAAD1//n/AAAAAAEAAAD1//j/AAAAAAEAAAD1//f/AAAAAAEAAAD1/woAAAAAAAEAAAD1/wsAAAAAAAEAAAD1/wwAAAAAAAEAAAD1/w0AAAAAAAEAAAD1/w4AAAAAAAEAAAD1/w8AAAAAAAEAAAD1/xAAAAAAAAEAAAD1/xEAAAAAAAIAAAD2/xEAAAABAAIAAAD3/xEAAAABAAIAAAD4/xEAAAABAAIAAAD5/xEAAAABAAIAAAD6/xEAAAABAAIAAAD7/xEAAAABAAIAAAD8/xEAAAABAAIAAAD9/xEAAAABAAIAAAD+/xEAAAABAAIAAAD//xEAAAABAAIAAAAAABEAAAABAAIAAAABABEAAAABAAIAAAACABEAAAABAAIAAAADABEAAAABAAIAAAAEABEAAAABAAIAAAAFABEAAAABAAIAAAAGABEAAAABAAIAAAAHABEAAAABAAIAAAAIABEAAAABAAIAAAAJABEAAAABAAIAAAAKABAAAAACAAEAAAAKAA8AAAACAAEAAAAKAA4AAAACAAEAAAAKAA0AAAACAAEAAAAKAAwAAAACAAEAAAAKAAsAAAACAAEAAAAKAAoAAAACAAEAAAAKABEAAAACAAIAAAAKAO3/AAACAAAAAAAKAPX/AAACAAEAAAAKAPT/AAACAAEAAAAKAPP/AAACAAEAAAAKAPL/AAACAAEAAAAKAPH/AAACAAEAAAAKAPD/AAACAAEAAAAKAO//AAACAAEAAAAKAO7/AAACAAEAAAAJAO3/AAABAAAAAAAIAO3/AAABAAAAAAAHAO3/AAABAAAAAAAGAO3/AAABAAAAAAAFAO3/AAABAAAAAAAEAO3/AAABAAAAAAADAO3/AAABAAAAAAACAO3/AAABAAAAAAABAO3/AAABAAAAAAAAAO3/AAABAAAAAAD//+3/AAABAAAAAAD+/+3/AAABAAAAAAD9/+3/AAABAAAAAAD8/+3/AAABAAAAAAD7/+3/AAABAAAAAAD6/+3/AAABAAAAAAD5/+3/AAABAAAAAAD4/+3/AAABAAAAAAD3/+3/AAABAAAAAAD2/+3/AAABAAAAAAD1/+3/AAAAAAAAAAD1/+7/AAAAAAEAAAD1/+//AAAAAAEAAAD1//D/AAAAAAEAAAD1//H/AAAAAAEAAAD1//L/AAAAAAEAAAD1//P/AAAAAAEAAAD1//T/AAAAAAEAAAD1//X/AAAAAAEAAAA=")
+tile_set = SubResource("TileSet_05u5g")
+
+[node name="BrickSet" type="TileMapLayer" parent="." groups=["Brick"]]
+position = Vector2(0, 16)
+tile_map_data = PackedByteArray("AAAGAP//AAABAAAAAAAGAO//AAAAAAAAAAAGAPH/AAACAAIAAAAGAPP/AAABAAIAAAAGAPb/AAAAAAEAAAAGAPf/AAAAAAEAAAAGAPj/AAAAAAEAAAAGAPn/AAAAAAEAAAAGAPr/AAAAAAEAAAAGAP3/AAACAAAAAAAGAP7/AAAAAAAAAAAHAPH/AAACAAIAAAAHAPP/AAABAAIAAAAHAPb/AAAAAAEAAAAHAPf/AAAAAAEAAAAHAPj/AAAAAAEAAAAHAPn/AAAAAAEAAAAHAPr/AAAAAAEAAAAHAP3/AAACAAAAAAAHAP7/AAAAAAAAAAAIAPP/AAABAAIAAAAIAPb/AAAAAAEAAAAIAPf/AAAAAAEAAAAIAPj/AAAAAAEAAAAIAPn/AAAAAAEAAAAIAPr/AAAAAAEAAAAIAP3/AAACAAAAAAD3//P/AAABAAIAAAD3//b/AAABAAEAAAD3//f/AAABAAEAAAD3//j/AAABAAEAAAD3//n/AAABAAEAAAD3//r/AAABAAEAAAD3//3/AAACAAAAAAD4//H/AAACAAIAAAD4//P/AAABAAIAAAD4//b/AAABAAEAAAD4//f/AAABAAEAAAD4//j/AAABAAEAAAD4//n/AAABAAEAAAD4//r/AAABAAEAAAD4//3/AAACAAAAAAD4//7/AAAAAAAAAAD5/+//AAAAAAAAAAD5//H/AAACAAIAAAD5//P/AAABAAIAAAD5//b/AAABAAEAAAD5//f/AAABAAEAAAD5//j/AAABAAEAAAD5//n/AAABAAEAAAD5//r/AAABAAEAAAD5//3/AAACAAAAAAD5//7/AAAAAAAAAAD5////AAABAAAAAAD6/+//AAAAAAAAAAD6//H/AAACAAIAAAD6//P/AAABAAIAAAD6//b/AAABAAEAAAD6//f/AAABAAEAAAD6//j/AAABAAEAAAD6//n/AAABAAEAAAD6//r/AAABAAEAAAD6//3/AAACAAAAAAD6//7/AAAAAAAAAAD6////AAABAAAAAAD7/+//AAAAAAAAAAD7//H/AAACAAIAAAD7//P/AAABAAIAAAD7//3/AAACAAAAAAD7//7/AAAAAAAAAAD7////AAABAAAAAAD8/+//AAAAAAAAAAD8//H/AAACAAIAAAD8//P/AAABAAIAAAD8//3/AAACAAAAAAD8//7/AAAAAAAAAAD8////AAABAAAAAAD9/+//AAAAAAAAAAD9//H/AAACAAIAAAD9//P/AAABAAIAAAD9//3/AAACAAAAAAD9//7/AAAAAAAAAAD9////AAABAAAAAAD+/+//AAAAAAAAAAD+//H/AAACAAIAAAD+//P/AAABAAIAAAD+//b/AAACAAEAAAD+//f/AAACAAEAAAD+//j/AAACAAEAAAD+//n/AAACAAEAAAD+//r/AAACAAEAAAD+//3/AAACAAAAAAD+//7/AAAAAAAAAAD+////AAABAAAAAAD//+//AAAAAAAAAAD///H/AAACAAIAAAD///P/AAABAAIAAAD///b/AAACAAEAAAD///f/AAACAAEAAAD///j/AAACAAEAAAD///n/AAACAAEAAAD///r/AAACAAEAAAD///3/AAACAAAAAAD///7/AAAAAAAAAAD/////AAABAAAAAAAAAO//AAAAAAAAAAAAAPH/AAACAAIAAAAAAPP/AAABAAIAAAAAAPb/AAACAAEAAAAAAPf/AAACAAEAAAAAAPj/AAACAAEAAAAAAPn/AAACAAEAAAAAAPr/AAACAAEAAAAAAP3/AAACAAAAAAAAAP7/AAAAAAAAAAAAAP//AAABAAAAAAABAO//AAAAAAAAAAABAPH/AAACAAIAAAABAPP/AAABAAIAAAABAPb/AAACAAEAAAABAPf/AAACAAEAAAABAPj/AAACAAEAAAABAPn/AAACAAEAAAABAPr/AAACAAEAAAABAP3/AAACAAAAAAABAP7/AAAAAAAAAAABAP//AAABAAAAAAACAO//AAAAAAAAAAACAPH/AAACAAIAAAACAPP/AAABAAIAAAACAP3/AAACAAAAAAACAP7/AAAAAAAAAAACAP//AAABAAAAAAADAO//AAAAAAAAAAADAPH/AAACAAIAAAADAPP/AAABAAIAAAADAP3/AAACAAAAAAADAP7/AAAAAAAAAAADAP//AAABAAAAAAAEAO//AAAAAAAAAAAEAPH/AAACAAIAAAAEAPP/AAABAAIAAAAEAP3/AAACAAAAAAAEAP7/AAAAAAAAAAAEAP//AAABAAAAAAAFAO//AAAAAAAAAAAFAPH/AAACAAIAAAAFAPP/AAABAAIAAAAFAPb/AAAAAAEAAAAFAPf/AAAAAAEAAAAFAPj/AAAAAAEAAAAFAPn/AAAAAAEAAAAFAPr/AAAAAAEAAAAFAP3/AAACAAAAAAAFAP7/AAAAAAAAAAAFAP//AAABAAAAAAA=")
+tile_set = SubResource("TileSet_rxb0p")
+script = ExtResource("7_3pxkc")
+
+[node name="GameUI" parent="." instance=ExtResource("8_rxb0p")]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="Deadzone" to="Deadzone" method="_on_body_entered"]

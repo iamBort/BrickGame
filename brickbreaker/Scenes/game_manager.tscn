@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvbm8xl0y0cod"]
+
+[ext_resource type="Script" uid="uid://co12xr75lau0k" path="res://Scripts/game_manager.gd" id="1_oj352"]
+[ext_resource type="AudioStream" uid="uid://bgpnujg6s3bl8" path="res://Sounds/Death.mp3" id="2_sq00h"]
+[ext_resource type="AudioStream" uid="uid://bg4yaylqd0rvt" path="res://Sounds/explosion.wav" id="3_mmt5l"]
+[ext_resource type="AudioStream" uid="uid://bqk3muk0an73i" path="res://Sounds/BrickBreakerThemeFinal.wav" id="4_fgdfb"]
+[ext_resource type="AudioStream" uid="uid://ccam802tbpjfl" path="res://Sounds/Victory.mp3" id="5_fgdfb"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_oj352")
+
+[node name="DeathStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sq00h")
+bus = &"SFX"
+
+[node name="ExplosionStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mmt5l")
+volume_db = -8.239
+bus = &"SFX"
+
+[node name="ThemeStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fgdfb")
+autoplay = true
+bus = &"Music"
+
+[node name="VictoryStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fgdfb")
+bus = &"SFX"
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PlayTimer" type="Timer" parent="."]
+editor_description = "After timer, the game will start and the player will move"
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[connection signal="finished" from="ThemeStreamPlayer" to="." method="_on_theme_stream_player_finished"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="PlayTimer" to="." method="_on_play_timer_timeout"]

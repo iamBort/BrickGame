@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://peh2ak5weq5a"]
+
+[ext_resource type="Script" uid="uid://c26ubo2xk81ev" path="res://Scripts/ball.gd" id="1_41u45"]
+[ext_resource type="Texture2D" uid="uid://onrir3mplehr" path="res://Sprites/ball.png" id="2_ij5cq"]
+[ext_resource type="AudioStream" uid="uid://cdeg5jpnshvmy" path="res://Sounds/Hit.wav" id="3_376qj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kl852"]
+radius = 25.02
+
+[node name="Ball" type="CharacterBody2D" groups=["DeadzoneInteract"]]
+floor_constant_speed = true
+script = ExtResource("1_41u45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kl852")
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.66612, 1.66612)
+texture = ExtResource("2_ij5cq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_376qj")
+volume_db = -13.117
+bus = &"SFX"
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_timer_timeout"]

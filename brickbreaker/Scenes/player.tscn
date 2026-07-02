@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi4a34chw4bmo"]
+
+[ext_resource type="Script" uid="uid://wjme4mnr8ovo" path="res://Scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://byo6ifr7dd7pi" path="res://Sprites/Hover.png" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl852"]
+size = Vector2(127.71, 32.0946)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.20537e-06, 0)
+scale = Vector2(1.004, 0.990977)
+shape = SubResource("RectangleShape2D_kl852")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i3pqv")

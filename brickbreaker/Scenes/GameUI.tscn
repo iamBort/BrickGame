@@ -1,0 +1,235 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6yh0ac7l5hwn"]
+
+[ext_resource type="Script" uid="uid://cj660aad0w1aw" path="res://Scripts/ui.gd" id="1_dewlx"]
+[ext_resource type="Texture2D" uid="uid://br2nrdfn6dv1c" path="res://Sprites/BackGround.png" id="2_nxvpl"]
+[ext_resource type="Texture2D" uid="uid://epy1hws1vpv3" path="res://Sprites/Trophy.png" id="3_dewlx"]
+[ext_resource type="Texture2D" uid="uid://oytmt0x8d55p" path="res://Sprites/Skull.png" id="3_frnsy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dewlx"]
+texture = ExtResource("2_nxvpl")
+region_rect = Rect2(243.776, 14.1086, 1432.26, 1306.73)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3iaii"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w371h"]
+load_path = "res://.godot/imported/sound-on.svg-34fa6f23df926d90e652060e0edd3fc8.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nxvpl"]
+load_path = "res://.godot/imported/speaker.svg-82709772b387b01363fd289c2d29bff7.ctex"
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dewlx")
+
+[node name="BGPanel" type="Panel" parent="."]
+z_index = -1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -797.0
+offset_top = -600.0
+offset_right = 403.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_dewlx")
+
+[node name="DeathPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Death" type="TextureRect" parent="DeathPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = 31.0
+offset_right = 157.0
+offset_bottom = 334.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_frnsy")
+
+[node name="DeathResetButton" type="Button" parent="DeathPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = 334.0
+offset_right = 159.0
+offset_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Game over!"
+
+[node name="VictoryPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Trophy" type="TextureRect" parent="VictoryPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -300.0
+offset_right = 159.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_dewlx")
+
+[node name="VictoryResetButton" type="Button" parent="VictoryPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -159.0
+offset_top = 334.0
+offset_right = 159.0
+offset_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Victory!"
+
+[node name="PauseMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.5
+offset_top = -243.5
+offset_right = 190.5
+offset_bottom = 243.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3iaii")
+
+[node name="ContinueButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -128.0
+offset_right = 157.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
+
+[node name="ResetButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -62.0
+offset_right = 157.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset
+"
+
+[node name="QuitButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = 7.0
+offset_right = 157.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit
+"
+
+[node name="MusicButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.5
+offset_top = -166.5
+offset_right = -71.5
+offset_bottom = -70.5
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = SubResource("CompressedTexture2D_w371h")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SoundButton" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 67.5
+offset_top = -166.5
+offset_right = 169.5
+offset_bottom = -70.5
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = SubResource("CompressedTexture2D_nxvpl")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="button_down" from="DeathPanel/DeathResetButton" to="." method="_on_victory_reset_button_button_down"]
+[connection signal="button_down" from="VictoryPanel/VictoryResetButton" to="." method="_on_victory_reset_button_button_down"]
+[connection signal="button_down" from="PauseMenu/ContinueButton" to="." method="_on_continue_button_button_down"]
+[connection signal="button_down" from="PauseMenu/ResetButton" to="." method="_on_reset_button_button_down"]
+[connection signal="button_down" from="PauseMenu/QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_down" from="PauseMenu/MusicButton" to="." method="_on_music_button_button_down"]
+[connection signal="button_down" from="PauseMenu/SoundButton" to="." method="_on_sound_button_button_down"]
